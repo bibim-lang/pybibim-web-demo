@@ -1,0 +1,19 @@
+@charset "utf-8";
+
+@import "~bootstrap/dist/css/bootstrap.css";
+
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/css/font-awesome.css";
+
+@import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
+
+.code {
+  height: 80%;
+}
+#editor {
+  height: 100%;
+}
+#output {
+  background-color: #EEE;
+  padding: 1em;
+}

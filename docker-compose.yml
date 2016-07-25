@@ -1,0 +1,26 @@
+version: "2"
+services:
+  static:
+    build:
+      context: ./static
+    volumes:
+      - ./static/src:/srv/static/src
+      - ./static/templete:/srv/static/templete
+      - ./static/package.json:/srv/static/package.json
+      - ./static/.eslintrc.js:/srv/static/.eslintrc.js
+      - ./static/webpack.config.js:/srv/static/webpack.config.js
+      - ./static/dist:/srv/static/dist
+  flask:
+    build:
+      context: ./web
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - ./web/data/flask:/var/www/flask
+      - ./web/data/flask.conf:/etc/nginx/sites-available/flask.conf:ro
+      - ./web/data/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf:ro
+      - ./web/data/log/uwsgi:/var/log/uwsgi
+      - ./web/data/log/nginx:/var/log/nginx
+      - ./static/dist:/var/www/flask/app/static
+    restart: always

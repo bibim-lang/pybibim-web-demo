@@ -1,0 +1,38 @@
+<html>
+<head>
+  <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+  <meta charset="utf-8">
+  <title>PyBibim Live Demo</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}?v=0.0.1">
+</head>
+<body>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>PyBibim Live Demo</h1>
+      <p><a href="http://bibim-lang.github.io/">Bibim</a>의 파이썬 구현체인 <a href="https://github.com/bibim-lang/pybibim">PyBibim</a>을 웹에서 실행해 볼 수 있는 데모 페이지입니다.
+      <br>이 데모 페이지는 <a href="http://pypyjs.org/">PyPy.js</a>와 <a href="http://ace.c9.io/">Ace</a>를 이용해 만들어졌습니다.
+      <br>소스코드는 <a href="https://github.com/bibim-lang/pybibim-demo">Github</a>에서 확인하실 수 있습니다.</p>
+      <p class="text-danger">주의 1: <code>@:1</code>을 통해 표준 입력을 받지 마세요! 웹 브라우저가 중지될 것입니다.
+      <br>주의 2: 유니코드 입출력이 정상적으로 되지 않거나, 줄바꿈 문자를 출력하지 않으면 예기치 못한 동작을 하는 등의 다양한 버그들이 있습니다.
+      <br>주의 3: 해당 데모는 어마어마하게 느립니다.</p>
+      <p>이런 문제들을 피하고 싶으시다구요? <a href="https://github.com/bibim-lang/pybibim">PyBibim</a>을 직접 설치하여 사용해보세요! 데모는 데모일 뿐입니다.</p>
+    </div>
+  </div>
+  <div class="row code">
+    <div class="col-xs-6">
+    <div id="editor"></div>
+    </div>
+    <div class="col-xs-6">
+      <div class="right-panel">
+        <button id="run" class="btn btn-default" type="button" name="run">실행</button>
+        <h3>실행 결과</h3>
+        <pre id="output"></pre>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{{ url_for('static', filename='bundle.js') }}?v=0.0.1" type="text/javascript" charset="utf-8"></script>
+<script src="{{ url_for('static', filename='vs/loader.js') }}?v=0.0.1" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>
