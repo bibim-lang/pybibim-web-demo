@@ -1,7 +1,7 @@
 FROM ubuntu:14.04
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN sudo sed -i 's/archive.ubuntu.com/ftp.daumkakao.com/g' /etc/apt/sources.list
+#RUN sudo sed -i 's/archive.ubuntu.com/ftp.daumkakao.com/g' /etc/apt/sources.list
 RUN apt-get update && apt-get -y install \
         nginx \
         python-pip \
