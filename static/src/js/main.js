@@ -37,11 +37,13 @@ window.$(document).ready(function() {
   let $run = $('#run');
   $run.click(function () {
     $run.prop('disabled', true);
+    const stdin = $('#stdin').val();
+    console.log('stdin=' + stdin);
     $.post(
       "run",
       {
         code: editor.getValue(),
-        stdin: ""
+        stdin: stdin
       }
     ).done(data => {
       let $output = $("#output");
