@@ -42,7 +42,9 @@ def run():
         stdout, stderr = p.communicate()
     finally:
         remove(code_filename)
-    result = stdout.decode() + stderr.decode()
+    stdout = stdout.encode('raw_unicode_escape').decode('utf-8')
+    stderr = stderr.encode('raw_unicode_escape').decode('utf-8')
+    result = stdout + stderr
     if is_timeout:
         result = '-- timeout --\n' + result
     return result
