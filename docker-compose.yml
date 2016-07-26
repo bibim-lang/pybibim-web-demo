@@ -4,12 +4,12 @@ services:
     build:
       context: ./static
     volumes:
-      - ./static/src:/srv/static/src
-      - ./static/templete:/srv/static/templete
-      - ./static/package.json:/srv/static/package.json
-      - ./static/.eslintrc.js:/srv/static/.eslintrc.js
-      - ./static/webpack.config.js:/srv/static/webpack.config.js
-      - ./static/dist:/srv/static/dist
+      - ./static/src:/srv/src
+      - ./static/templete:/srv/templete
+      - ./static/package.json:/srv/package.json
+      - ./static/.eslintrc.js:/srv/.eslintrc.js
+      - ./static/webpack.config.js:/srv/webpack.config.js
+      - ./static/dist:/srv/dist
   flask:
     build:
       context: ./web
