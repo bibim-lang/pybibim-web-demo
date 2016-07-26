@@ -5,7 +5,7 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 from os import remove
-from subprocess import Popen, PIPE
+from subprocess32 import Popen, PIPE, TimeoutExpired
 from uuid import uuid4
 from flask import Flask, render_template, request
 from app import config as config
@@ -22,6 +22,7 @@ def index():
 
 @app.route('/run', methods=['POST'])
 def run():
+    is_timeout = False
     code = request.form.get('code')
     stdin = request.form.get('stdin')
     code_filename = "/tmp/" + str(uuid4())
@@ -34,7 +35,14 @@ def run():
             stdin=PIPE,
             stderr=PIPE
         )
-        stdout, stderr = p.communicate(input=stdin)
+        stdout, stderr = p.communicate(input=stdin, timeout=15)
+    except TimeoutExpired:
+        is_timeout = True
+        p.kill()
+        stdout, stderr = p.communicate()
     finally:
         remove(code_filename)
-    return stdout.decode() + stderr.decode()
+    result = stdout.decode() + stderr.decode()
+    if is_timeout:
+        result = '-- timeout --\n' + result
+    return result
