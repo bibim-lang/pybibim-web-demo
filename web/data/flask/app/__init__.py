@@ -35,15 +35,15 @@ def run():
             stdin=PIPE,
             stderr=PIPE
         )
-        stdout, stderr = p.communicate(input=stdin, timeout=15)
+        stdout, stderr = p.communicate(input=stdin.encode('utf-8'), timeout=15)
     except TimeoutExpired:
         is_timeout = True
         p.kill()
         stdout, stderr = p.communicate()
     finally:
         remove(code_filename)
-    stdout = stdout.encode('raw_unicode_escape').decode('utf-8')
-    stderr = stderr.encode('raw_unicode_escape').decode('utf-8')
+    stdout = stdout.decode('utf-8')
+    stderr = stderr.decode('utf-8')
     result = stdout + stderr
     if is_timeout:
         result = '-- timeout --\n' + result
