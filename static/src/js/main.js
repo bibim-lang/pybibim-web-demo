@@ -4,6 +4,41 @@ import '../css/main.scss';
 let editor;
 
 function initMonaco() {
+  monaco.languages.register({ id: 'bibim' });
+
+  monaco.languages.setMonarchTokensProvider('bibim', {
+    keywords: [
+      '@'
+    ],
+    operators: [
+      '+', '-', '*', '/', '&', '|', '!', '?=', '>', '<', '=', '^', ':'
+    ],
+    brackets: [
+      ['(',')','delimiter.parenthesis'],
+      ['{','}','delimiter.curly'],
+      ['[',']','delimiter.square']
+    ],
+    symbols:    /[=><!&|+\-*\/\^:]+/,
+    delimiters: /[;@]/,
+    tokenizer: {
+      root: [
+        { include: '@whitespace' },
+        [/[{}()\[\]]/, '@brackets'],
+        [/@symbols/, { cases: { '@keywords' : 'keyword',
+                                '@operators': 'operator',
+                                '@default'  : '' } } ],
+        [/\d[\d\s]*/, 'number'],
+        [/@delimiters/, { cases: { '@keywords': 'keyword',
+                                   '@default': 'delimiter' }}],
+
+      ],
+      whitespace: [
+        [/\s+/, 'white'],
+        [/~\s*#((?!#~).)*#\s*~/, 'comment'],
+      ],
+    },
+  });
+
   editor = monaco.editor.create(document.getElementById('editor'), {
     value: [
     '{[0; @:1 = {',
@@ -21,7 +56,7 @@ function initMonaco() {
     '\t[11; 10]',
     '}]}'
     ].join('\n'),
-    // language: 'javascript'
+    language: 'bibim'
   });
 }
 
