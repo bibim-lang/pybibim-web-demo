@@ -7,7 +7,7 @@ sys.setdefaultencoding('utf-8')
 from os import remove
 from subprocess32 import Popen, PIPE, TimeoutExpired
 from uuid import uuid4
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from app import config as config
 
 
@@ -44,7 +44,8 @@ def run():
         remove(code_filename)
     stdout = stdout.decode('utf-8')
     stderr = stderr.decode('utf-8')
-    result = stdout + stderr
-    if is_timeout:
-        result = '-- timeout --\n' + result
-    return result
+    return jsonify({
+        'stdout': stdout,
+        'stderr': stderr,
+        'is_timeout': is_timeout
+    })

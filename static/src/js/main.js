@@ -23,7 +23,7 @@ function initMonaco() {
     tokenizer: {
       root: [
         {include: '@whitespace'},
-        [/[{}()[]]/, '@brackets'],
+        [/[{}()\[\]]/, '@brackets'], // eslint-disable-line no-useless-escape
         [/@symbols/, {cases: {
           '@keywords': 'keyword',
           '@operators': 'operator',
@@ -80,7 +80,7 @@ function loadMonaco() {
 
 window.$(document).ready(function() {
   loadMonaco(editor);
-  let $run = $('#run');
+  const $run = $('#run');
   $run.click(function() {
     $run.prop('disabled', true);
     const stdin = $('#stdin').val();
@@ -92,14 +92,23 @@ window.$(document).ready(function() {
         stdin: stdin
       }
     ).done(data => {
-      let $output = $('#output');
-      $output.empty();
-      $output.append(data);
+      const $stdout = $('#stdout');
+      $stdout.empty();
+      $stdout.append(data.stdout);
+      if (data.is_timeout) {
+        $stdout.append('\n --- TIME OUT ---');
+      }
+      const $stderr = $('#stderr');
+      $stderr.empty();
+      $stderr.append(data.stderr);
+      if (data.is_timeout) {
+        $stderr.append('\n --- TIME OUT ---');
+      }
       $run.prop('disabled', false);
     }).fail(() => {
-      let $output = $('#output');
-      $output.empty();
-      $output.append('코드 실행 실패');
+      const $stdout = $('#stdout');
+      $stdout.empty();
+      $stdout.append('코드 실행 실패');
       $run.prop('disabled', false);
     });
   });
