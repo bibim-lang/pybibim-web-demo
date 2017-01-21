@@ -41,6 +41,7 @@ function initMonaco() {
 
   editor = monaco.editor.create(document.getElementById('editor'), {
     value: [
+    '~# HELLO WORLD 예제 #~',
     '{[0; @:1 = {',
     '\t[0; 72]',
     '\t[1; 69]',
