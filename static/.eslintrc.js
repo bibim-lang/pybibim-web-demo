@@ -5,30 +5,32 @@ module.exports = {
   },
   extends: 'xo',
   globals: {
-    goog: true
+    'monaco': true,
+    '$': true
   },
   rules: {
-    'indent': [2, 2, {
+    'indent': ['error', 2, {
       SwitchCase: 1
     }],
-    'space-before-function-paren': [2, 'never'],
-    'valid-jsdoc': [2, {
+    'linebreak-style': ['off', 'unix'],
+    'space-before-function-paren': ['error', 'never'],
+    'valid-jsdoc': ['error', {
       requireReturn: false,
       prefer: {
         returns: 'return'
       }
     }],
-    'require-jsdoc': 1,
-    'max-len': [1, 80, 4, {
+    'require-jsdoc': 'off',
+    'max-len': ['warn', 80, 4, {
       ignoreComments: true,
       ignoreUrls: true
     }],
 
     //  Resetting things that eslint-config-xo has an opinion about, but the
     //  Google Style Guide doesn't.
-    'curly': 0,
-    'no-floating-decimal': 0,
-    'no-unused-vars': [2, {
+    'curly': 'off',
+    'no-floating-decimal': 'off',
+    'no-unused-vars': ['error', {
       "args": "none"
     }],
 

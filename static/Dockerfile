@@ -1,4 +1,4 @@
-FROM node:6.2.2
+FROM node:6.9.4
 
 ADD ./package.json /srv/package.json
 
