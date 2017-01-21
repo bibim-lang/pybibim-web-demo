@@ -34,7 +34,7 @@ function initMonaco() {
       ],
       whitespace: [
         [/\s+/, 'white'],
-        [/~\s*#((?!#~).)*#\s*~/, 'comment'],
+        [/~\s*#((?!#~)[\s|\S])*#\s*~/, 'comment'],
       ],
     },
   });
