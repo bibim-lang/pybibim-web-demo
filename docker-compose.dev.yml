@@ -15,14 +15,9 @@ services:
       context: ./web
     depends_on:
       - static
-    expose:
-        - "80"
-    networks:
-        - default
-        - proxy
-    environment:
-        - VIRTUAL_HOST=pybibim.update.sh
-        - VIRTUAL_NETWORK=nginx-proxy
+    ports:
+      - "80:80"
+      - "8080:8080"
     volumes:
       - ./web/data/flask:/var/www/flask
       - ./web/data/flask.conf:/etc/nginx/sites-available/flask.conf:ro
@@ -31,10 +26,3 @@ services:
       - ./web/data/log/nginx:/var/log/nginx
       - ./static/dist:/var/www/flask/app/static
     restart: always
-
-networks:
-    proxy:
-        external:
-            name: nginx-proxy
-    default:
-        driver: bridge

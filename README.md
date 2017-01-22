@@ -19,7 +19,7 @@ PyBibim Live Demo는 [PyBibim(파이비빔)](https://github.com/bibim-lang/pybib
 2. Start docker
 
     ```
-    docker-compose up
+    docker-compose -f docker-compose.dev.yml up
     ```
 
 3. Open `http://localhost`
