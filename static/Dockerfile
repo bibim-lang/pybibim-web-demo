@@ -1,4 +1,4 @@
-FROM node:6.9.4
+FROM arm64v8/node:12
 
 ADD ./package.json /srv/package.json
 

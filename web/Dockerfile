@@ -1,7 +1,7 @@
-FROM ubuntu:14.04
+FROM arm64v8/ubuntu:18.04
 ENV DEBIAN_FRONTEND noninteractive
 
-#RUN sudo sed -i 's/archive.ubuntu.com/ftp.daumkakao.com/g' /etc/apt/sources.list
+RUN sed -i 's/archive.ubuntu.com/ftp.daumkakao.com/g' /etc/apt/sources.list
 RUN apt-get update && apt-get -y install \
         nginx \
         python-pip \
@@ -9,6 +9,7 @@ RUN apt-get update && apt-get -y install \
         uwsgi-plugin-python \
         python-psycopg2 \
         libpq-dev \
+        libssl-dev \
         supervisor && \
     apt-get clean && rm -rf /var/cache/apt/* && rm -rf /var/lib/apt/lists/*
 
